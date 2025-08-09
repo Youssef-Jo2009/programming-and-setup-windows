@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دليل بسيط للبرمجة وتثبيت ويندوز بالعربي مع خلفية سوداء وتأثيرات هادئة">
+    <title>دليل البرمجة وتسطيب ويندوز</title>
+    <style>
+        /* Download Links Styles */
+        .download-links {
+            margin: 15px 0;
+            background: var(--glass-effect);
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+        
+        .download-links ul {
+            margin-top: 10px;
+            padding-right: 20px;
+        }
+        
+        .download-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .download-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        :root {
+            --primary-color: #8b5fc6; /* Purple */
+            --secondary-color: #6f3aa6; /* Darker Purple */
+            --bg-color: #000000; /* Black */
+            --card-bg: #0f0f12; /* Dark card background */
+            --text-color: #bfb8d9; /* Muted text */
+            --glass-effect: rgba(255, 255, 255, 0.03); /* Subtle glass effect */
+            --border-radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", Arial, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background blurred shapes */
+        .bg-shape-1, .bg-shape-2 {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .bg-shape-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-color), transparent 70%);
+            top: 10%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .bg-shape-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary-color), transparent 70%);
+            bottom: 10%;
+            right: 60%;
+            transform: translateX(50%);
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fixed Header */
+        header {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-effect);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-icon {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            background: var(--glass-effect);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(-6px); }
+            50% { transform: translateY(6px); }
+            100% { transform: translateY(-6px); }
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: white;
+        }
+        
+        nav ul li a:focus {
+            outline: 3px solid rgba(139, 95, 198, 0.25);
+            border-radius: 4px;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            right: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+            right: 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+        
+        .hero-content h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .features {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .feature {
+            background: var(--glass-effect);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            flex: 1;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .code-block {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            font-family: monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+        }
+        
+        .code-block code {
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .hero-aside {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .hero-aside h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            border-bottom: 1px solid var(--glass-effect);
+            padding-bottom: 0.5rem;
+        }
+        
+        .quick-links {
+            list-style: none;
+        }
+        
+        .quick-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .quick-links li a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .quick-links li a:hover {
+            color: white;
+        }
+        
+        .quick-links li a:focus {
+            outline: 3px solid rgba(139, 95, 198, 0.25);
+            border-radius: 4px;
+        }
+        
+        .quick-links li a::before {
+            content: '→';
+            color: var(--primary-color);
+        }
+        
+        /* Section Styling */
+        section {
+            margin: 4rem 0;
+        }
+        
+        section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            right: 0;
+            background: linear-gradient(to left, var(--primary-color), transparent);
+        }
+        
+        /* Programming Basics Section */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .step {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+        
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-effect);
+            border-radius: 50%;
+        }
+        
+        .step-content h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        /* Windows Installation Section */
+        .windows-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .windows-step {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .windows-step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .windows-step-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        
+        .windows-step-title {
+            color: white;
+            font-size: 1.25rem;
+        }
+        
+        .windows-step-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .windows-step-image {
+            background: var(--glass-effect);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .windows-step-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .windows-step-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .windows-step-description {
+            line-height: 1.7;
+        }
+        
+        .tips {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .tips h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .tips ul {
+            padding-right: 1.5rem;
+        }
+        
+        .tips ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Programming Languages Section */
+        .language-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .language-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            width: 300px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-effect);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(139, 95, 198, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .language-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+        
+        .language-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .language-icon {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .language-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .language-card p {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .language-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .language-features span {
+            background: var(--glass-effect);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .language-card:hover .language-features span {
+            background: rgba(139, 95, 198, 0.2);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        /* Reveal on scroll animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 700ms cubic-bezier(.2,.9,.2,1);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Sequential animations for language cards */
+        .language-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .language-card:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+        
+        .language-card:nth-child(3) {
+            transition-delay: 0.5s;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .language-icon svg {
+            transition: all 0.5s ease;
+        }
+        
+        .language-card:hover .language-icon svg {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 920px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                flex-direction: column;
+            }
+            
+            .language-cards {
+                gap: 1.5rem;
+            }
+            
+            .windows-step-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .logo {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                width: 100%;
+                overflow-x: auto;
+                padding: 0.5rem 0;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
+            
+            nav ul::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Edge */
+            }
+            
+            nav ul li {
+                flex: 0 0 auto;
+                white-space: nowrap;
+            }
+            
+            .language-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .language-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+        
+        @media (max-width: 520px) {
+            .step {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-icon {
+                margin: 0 auto 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background shapes for visual interest -->
+    <div class="bg-shape-1"></div>
+    <div class="bg-shape-2"></div>
+    
+    <div class="container">
+        <!-- Fixed Header with Navigation -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">Jo</div>
+                <div class="logo-text">
+                    <h1>دليل البرمجة وتسطيب ويندوز</h1>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#programming">أساسيات البرمجة</a></li>
+                    <li><a href="#windows">تسطيب ويندوز</a></li>
+                    <li><a href="#languages">لغات البرمجة</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Hero Section -->
+        <div id="home" class="hero">
+            <div class="hero-content">
+                <h2 class="reveal">تعلم البرمجة بخطوات بسيطة</h2>
+                
+                <div class="features reveal">
+                    <div class="feature">مباشر</div>
+                    <div class="feature">تطبيقي</div>
+                    <div class="feature">مريح</div>
+                </div>
+                
+                <div class="code-block reveal">
+                    <code>print("مرحبا بالعالم البرمجي!")</code>
+                </div>
+                
+                <p class="reveal">ابدأ رحلتك في عالم البرمجة وتعلم كيفية تثبيت نظام ويندوز بخطوات بسيطة وواضحة.</p>
+            </div>
+            
+            <div class="hero-aside reveal">
+                <h3>روابط سريعة</h3>
+                <ul class="quick-links">
+                    <li><a href="#programming">أساسيات البرمجة</a></li>
+                    <li><a href="#windows">تسطيب ويندوز</a></li>
+                    <li><a href="#languages">لغات البرمجة</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Programming Basics Section -->
+        <section id="programming" class="reveal">
+            <h2>أساسيات البرمجة</h2>
+            
+            <div class="steps">
+                <div class="step reveal">
+                    <div class="step-icon">١</div>
+                    <div class="step-content">
+                        <h3>ما هي البرمجة؟</h3>
+                        <p>البرمجة هي عملية كتابة تعليمات للحاسوب لتنفيذ مهام محددة. تستخدم لغات البرمجة كوسيلة للتواصل مع الحاسوب وإخباره بما يجب عليه فعله. تتكون البرمجة من مجموعة من الخطوات المنطقية المتسلسلة التي تؤدي إلى حل مشكلة معينة أو تنفيذ مهمة محددة.</p>
+                    </div>
+                </div>
+                
+                <div class="step reveal">
+                    <div class="step-icon">٢</div>
+                    <div class="step-content">
+                        <h3>المفاهيم الأساسية</h3>
+                        <p>تشمل المفاهيم الأساسية في البرمجة: المتغيرات (لتخزين البيانات)، الشروط (لاتخاذ القرارات)، الحلقات (لتكرار العمليات)، الدوال (لتنظيم الكود وإعادة استخدامه)، والمصفوفات (لتخزين مجموعات من البيانات). فهم هذه المفاهيم يمكنك من بناء برامج بسيطة ومعقدة.</p>
+                    </div>
+                </div>
+                
+                <div class="step reveal">
+                    <div class="step-icon">٣</div>
+                    <div class="step-content">
+                        <h3>الخوارزميات وحل المشكلات</h3>
+                        <p>الخوارزمية هي مجموعة من الخطوات المنطقية لحل مشكلة. قبل البدء بالبرمجة، من المهم تحليل المشكلة وتقسيمها إلى خطوات صغيرة يمكن تنفيذها. هذه المهارة أساسية لأي مبرمج ناجح وتتطور مع الممارسة والخبرة.</p>
+                    </div>
+                </div>
+                
+                <div class="step reveal">
+                    <div class="step-icon">٤</div>
+                    <div class="step-content">
+                        <h3>البدء في البرمجة</h3>
+                        <p>للبدء في البرمجة، اختر لغة مناسبة للمبتدئين مثل بايثون أو جافاسكريبت. قم بتثبيت بيئة التطوير المناسبة، وابدأ بتعلم الأساسيات من خلال الدروس والتمارين. التطبيق العملي هو أفضل طريقة للتعلم، لذا حاول بناء مشاريع صغيرة لتطبيق ما تعلمته.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Windows Installation Guide Section -->
+        <section id="windows" class="reveal">
+            <h2>دليل تثبيت ويندوز</h2>
+            
+            <div class="windows-steps">
+                <div class="windows-step reveal">
+                    <div class="windows-step-header">
+                        <div class="windows-step-number">١</div>
+                        <div class="windows-step-title">تجهيز وسائط التثبيت</div>
+                    </div>
+                    <div class="windows-step-content">
+                        <div class="windows-step-image">
+                            <!-- Placeholder for Windows installation media image -->
+                            <svg width="100%" height="100%" viewBox="0 0 400 225" role="img" aria-label="تجهيز وسائط التثبيت">
+                                <rect width="400" height="225" fill="#1a1a1a"/>
+                                <rect x="100" y="50" width="200" height="125" rx="5" fill="#333"/>
+                                <rect x="120" y="70" width="160" height="85" fill="#0078d7"/>
+                                <rect x="150" y="175" width="100" height="20" rx="10" fill="#8b5fc6"/>
+                                <text x="200" y="190" font-size="12" fill="white" text-anchor="middle">تحميل ويندوز</text>
+                            </svg>
+                        </div>
+                        <div class="windows-step-description">
+                            <p>الخطوة الأولى هي تحميل ملف ISO الرسمي من موقع مايكروسوفت. بعد ذلك، ستحتاج إلى فلاشة USB بسعة 8GB على الأقل. استخدم برنامج Rufus أو Media Creation Tool لإنشاء وسائط تثبيت قابلة للإقلاع. تأكد من نسخ أي بيانات مهمة من الفلاشة قبل البدء لأن العملية ستؤدي إلى حذف كل البيانات الموجودة عليها.</p>
+                            <div class="download-links">
+                                <p><strong>روابط التنزيل الرسمية:</strong></p>
+                                <ul>
+                                    <li><a href="https://www.microsoft.com/ar-sa/software-download/windows10" target="_blank">تنزيل ويندوز 10 (الموقع الرسمي)</a></li>
+                                    <li><a href="https://www.microsoft.com/ar-sa/software-download/windows11" target="_blank">تنزيل ويندوز 11 (الموقع الرسمي)</a></li>
+                                    <li><a href="https://rufus.ie/ar/" target="_blank">تنزيل برنامج Rufus (الموقع الرسمي)</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="windows-step reveal">
+                    <div class="windows-step-header">
+                        <div class="windows-step-number">٢</div>
+                        <div class="windows-step-title">الإقلاع من وسائط التثبيت</div>
+                    </div>
+                    <div class="windows-step-content">
+                        <div class="windows-step-image">
+                            <!-- Placeholder for BIOS/UEFI boot menu image -->
+                            <svg width="100%" height="100%" viewBox="0 0 400 225" role="img" aria-label="الإقلاع من وسائط التثبيت">
+                                <rect width="400" height="225" fill="#1a1a1a"/>
+                                <rect x="50" y="25" width="300" height="175" rx="5" fill="#333"/>
+                                <text x="200" y="50" font-size="14" fill="white" text-anchor="middle">Boot Menu</text>
+                                <rect x="75" y="70" width="250" height="25" fill="#0f0f12"/>
+                                <text x="85" y="87" font-size="12" fill="white">1. USB Drive</text>
+                                <rect x="75" y="100" width="250" height="25" fill="#8b5fc6"/>
+                                <text x="85" y="117" font-size="12" fill="white">2. Hard Drive</text>
+                                <rect x="75" y="130" width="250" height="25" fill="#0f0f12"/>
+                                <text x="85" y="147" font-size="12" fill="white">3. CD/DVD Drive</text>
+                            </svg>
+                        </div>
+                        <div class="windows-step-description">
+                            <p>أدخل فلاشة USB في جهاز الكمبيوتر وأعد تشغيله. أثناء بدء التشغيل، اضغط على المفتاح المناسب للدخول إلى قائمة الإقلاع (عادة F2، F12، Delete، أو Esc حسب الشركة المصنعة للجهاز). اختر الإقلاع من فلاشة USB من القائمة. إذا كان جهازك يستخدم UEFI، قد تحتاج إلى تعطيل Secure Boot من إعدادات BIOS/UEFI.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="windows-step reveal">
+                    <div class="windows-step-header">
+                        <div class="windows-step-number">٣</div>
+                        <div class="windows-step-title">بدء عملية التثبيت</div>
+                    </div>
+                    <div class="windows-step-content">
+                        <div class="windows-step-image">
+                            <!-- Placeholder for Windows installation screen image -->
+                            <svg width="100%" height="100%" viewBox="0 0 400 225" role="img" aria-label="بدء عملية التثبيت">
+                                <rect width="400" height="225" fill="#1a1a1a"/>
+                                <rect x="25" y="25" width="350" height="175" rx="5" fill="#0078d7"/>
+                                <circle cx="200" cy="90" r="40" fill="white"/>
+                                <rect x="180" y="60" width="40" height="5" fill="#0078d7"/>
+                                <rect x="180" y="70" width="40" height="5" fill="#0078d7"/>
+                                <rect x="180" y="80" width="40" height="5" fill="#0078d7"/>
+                                <rect x="180" y="90" width="40" height="5" fill="#0078d7"/>
+                                <rect x="125" y="150" width="150" height="30" rx="15" fill="#8b5fc6"/>
+                                <text x="200" y="170" font-size="14" fill="white" text-anchor="middle">تثبيت الآن</text>
+                            </svg>
+                        </div>
+                        <div class="windows-step-description">
+                            <p>بعد الإقلاع من فلاشة USB، ستظهر شاشة بدء تثبيت ويندوز. اختر اللغة والوقت وتخطيط لوحة المفاتيح المناسب، ثم انقر على "التالي". انقر على "تثبيت الآن" لبدء عملية التثبيت. اقرأ واقبل شروط الترخيص. عند سؤالك عن نوع التثبيت، اختر "مخصص" إذا كنت ترغب في تثبيت نظيف أو إعادة تقسيم القرص الصلب.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="windows-step reveal">
+                    <div class="windows-step-header">
+                        <div class="windows-step-number">٤</div>
+                        <div class="windows-step-title">تقسيم القرص واختيار موقع التثبيت</div>
+                    </div>
+                    <div class="windows-step-content">
+                        <div class="windows-step-image">
+                            <!-- Placeholder for disk partitioning screen image -->
+                            <svg width="100%" height="100%" viewBox="0 0 400 225" role="img" aria-label="تقسيم القرص">
+                                <rect width="400" height="225" fill="#1a1a1a"/>
+                                <rect x="25" y="25" width="350" height="175" rx="5" fill="#0f0f12"/>
+                                <text x="200" y="50" font-size="14" fill="white" text-anchor="middle">أين تريد تثبيت ويندوز؟</text>
+                                <rect x="50" y="70" width="300" height="30" fill="#333"/>
+                                <text x="60" y="90" font-size="12" fill="white">القرص 0 القسم 1: النظام (100MB)</text>
+                                <rect x="50" y="105" width="300" height="30" fill="#8b5fc6"/>
+                                <text x="60" y="125" font-size="12" fill="white">القرص 0 القسم 2: غير مخصص (500GB)</text>
+                                <rect x="125" y="150" width="150" height="30" rx="15" fill="#0078d7"/>
+                                <text x="200" y="170" font-size="14" fill="white" text-anchor="middle">التالي</text>
+                            </svg>
+                        </div>
+                        <div class="windows-step-description">
+                            <p>في شاشة "أين تريد تثبيت ويندوز؟"، سترى الأقراص والأقسام المتاحة. إذا كنت ترغب في حذف جميع البيانات وإعادة تقسيم القرص، حدد كل قسم وانقر على "حذف" حتى يصبح القرص بالكامل مساحة غير مخصصة. ثم حدد المساحة غير المخصصة وانقر على "جديد" لإنشاء قسم جديد. حدد القسم الذي تريد تثبيت ويندوز عليه وانقر على "التالي".</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="windows-step reveal">
+                    <div class="windows-step-header">
+                        <div class="windows-step-number">٥</div>
+                        <div class="windows-step-title">إكمال التثبيت والإعداد الأولي</div>
+                    </div>
+                    <div class="windows-step-content">
+                        <div class="windows-step-image">
+                            <!-- Placeholder for Windows setup screen image -->
+                            <svg width="100%" height="100%" viewBox="0 0 400 225" role="img" aria-label="إكمال التثبيت">
+                                <rect width="400" height="225" fill="#1a1a1a"/>
+                                <rect x="25" y="25" width="350" height="175" rx="5" fill="#0078d7"/>
+                                <text x="200" y="60" font-size="16" fill="white" text-anchor="middle">مرحباً</text>
+                                <text x="200" y="90" font-size="14" fill="white" text-anchor="middle">دعنا نبدأ بإعداد جهازك</text>
+                                <rect x="100" y="120" width="200" height="40" rx="20" fill="#8b5fc6"/>
+                                <text x="200" y="145" font-size="14" fill="white" text-anchor="middle">التالي</text>
+                            </svg>
+                        </div>
+                        <div class="windows-step-description">
+                            <p>سيبدأ ويندوز في نسخ الملفات وتثبيت النظام، وسيعيد تشغيل الكمبيوتر عدة مرات أثناء العملية. بعد اكتمال التثبيت، ستظهر شاشة الإعداد الأولي. اتبع التعليمات لإعداد حساب المستخدم، واختيار الإعدادات المفضلة، وتكوين الاتصال بالإنترنت. يمكنك اختيار الإعدادات المخصصة لتعطيل بعض ميزات جمع البيانات إذا كنت تهتم بالخصوصية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tips reveal">
+                <h3>نصائح هامة</h3>
+                <ul>
+                    <li>قم بعمل نسخة احتياطية من جميع البيانات المهمة قبل البدء في عملية التثبيت.</li>
+                    <li>تأكد من توفر مصدر طاقة مستقر أثناء عملية التثبيت لتجنب أي مشاكل.</li>
+                    <li>بعد التثبيت، قم بتحديث جميع برامج تعريف الأجهزة من خلال مدير الأجهزة أو موقع الشركة المصنعة.</li>
+                    <li>قم بتثبيت برنامج مكافحة فيروسات موثوق لحماية نظامك الجديد.</li>
+                    <li>قم بتفعيل ويندوز باستخدام مفتاح المنتج الخاص بك أو ربطه بحساب مايكروسوفت.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Programming Languages Section -->
+        <section id="languages" class="reveal">
+            <h2>لغات البرمجة</h2>
+            
+            <div class="language-cards">
+                <div class="language-card reveal">
+                    <div class="language-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" role="img" aria-label="HTML">
+                            <path d="M10 5L15 50L30 55L45 50L50 5H10Z" fill="#e44d26"/>
+                            <path d="M30 10V50L42 46L46 10H30Z" fill="#f16529"/>
+                            <path d="M30 30L20 25L19 20H24L24.5 23L30 25L40 23L41 15H15L16 35H30L25 38L20 36L19.5 30H15L16 40L30 45L44 40L46 15H35L34 23L30 25V30Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h3>HTML</h3>
+                    <p>لغة ترميز النص التشعبي هي اللبنة الأساسية لبناء صفحات الويب. تستخدم لتحديد هيكل المحتوى على الإنترنت وتنظيمه بطريقة منطقية.</p>
+                    <div class="language-features">
+                        <span>هيكلة المحتوى</span>
+                        <span>سهلة التعلم</span>
+                        <span>أساس الويب</span>
+                    </div>
+                </div>
+                
+                <div class="language-card reveal">
+                    <div class="language-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" role="img" aria-label="Java">
+                            <path d="M25 45C15 47 15 42 10 45L12 35C22 30 17 25 17 20C17 10 30 5 30 15C30 20 25 25 25 30C25 35 35 43 25 45Z" fill="#5382a1"/>
+                            <path d="M32 15C32 10 40 5 45 10C50 15 45 25 35 20C38 25 45 30 45 35C45 40 40 45 30 45C20 45 35 35 35 30C35 25 32 20 32 15Z" fill="#f8981d"/>
+                        </svg>
+                    </div>
+                    <h3>Java</h3>
+                    <p>لغة برمجة قوية متعددة المنصات تستخدم في تطوير التطبيقات المؤسسية والأندرويد والألعاب وأنظمة الخوادم. تتميز بأمانها العالي وأدائها المستقر.</p>
+                    <div class="language-features">
+                        <span>متعددة المنصات</span>
+                        <span>كائنية التوجه</span>
+                        <span>قوية وآمنة</span>
+                    </div>
+                </div>
+                
+                <div class="language-card reveal">
+                    <div class="language-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" role="img" aria-label="Python">
+                            <path d="M30 5C25 5 20 6 20 10V15H35V17H15C10 17 5 20 5 25C5 30 5 35 5 35C5 40 10 45 15 45H20V40C20 35 25 30 30 30C35 30 40 30 45 30C50 30 55 25 55 20V15C55 10 50 5 45 5H30Z" fill="#366e9d"/>
+                            <path d="M30 55C35 55 40 54 40 50V45H25V43H45C50 43 55 40 55 35C55 30 55 25 55 25C55 20 50 15 45 15H40V20C40 25 35 30 30 30C25 30 20 30 15 30C10 30 5 35 5 40V45C5 50 10 55 15 55H30Z" fill="#ffc331"/>
+                            <circle cx="15" cy="25" r="2" fill="white"/>
+                            <circle cx="45" cy="35" r="2" fill="white"/>
+                        </svg>
+                    </div>
+                    <h3>Python</h3>
+                    <p>لغة برمجة سهلة القراءة وقوية تستخدم في تحليل البيانات والذكاء الاصطناعي وتطوير الويب والأتمتة. تتميز بقواعدها البسيطة ومكتباتها الغنية.</p>
+                    <div class="language-features">
+                        <span>سهلة التعلم</span>
+                        <span>متعددة الاستخدامات</span>
+                        <span>مكتبات غنية</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>صُنع لتكون القراءة مريحة — خلفية سوداء وواجهة عربية.</p>
+        <p>© <span id="year">2023</span></p>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Reveal on scroll effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+        
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
